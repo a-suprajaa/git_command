@@ -1,0 +1,234 @@
+What is Git?(it is a software)
+Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.
+
+What is Github?
+GitHub is a web-based interface that uses Git, the open source version control software that lets multiple people make separate changes to web pages at the same time.
+
+Difference between Git and Github:
+Git is a (version control system that lets you manage and keep track of your source code history). 
+GitHub is a (cloud-based hosting service) that lets you manage Git repositories. 
+
+
+Why github?
+    1) to maintain the history of the project
+    2) to keep a record of which person made which change and when the change was made.
+    3) sharing your code to people around the world
+    4) Showcase your work
+
+you can download Git from  gitscm.com
+you can download the command line version(highly recommended
+
+To check if it git is correctly installed you can 
+    1)open cmd 
+    2)run "git"
+  (You should see a list of git commands if git is installed successfully)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+some basic cmd commands
+ 1)dir -- list of all the files/folders in a folder(windows)
+   ls -- list of all the files/folders in a folder(linux)
+ 2)mkdir -- (make directory)To create a directory/folder(both are same)
+ 3)cd "dir_name" -- to go inside the folder
+ 4)touch "file_name" --to create a file
+
+
+git commands:(basic)
+(open git bash(go to the folder you want and right click and select open git bash here option))
+
+1) git init 
+        --To initialize a repository(makes your project a repository)
+        --This command initializes a folder called .git in your folder(which now is a repository)
+        --The .git folder contains all the information that is necessary for your project in version control and
+          all the information about commits, remote repository address, etc. All of them are present in this folder.
+          It also contains a log that stores your commit history so that you can roll back to history.   
+        -- This .git folder will keep a track of all operations that you make further
+                  To see this folder(its a hidden folder),so
+                  dir /ah --to list all hidden folders(windows)
+                  ls -a (linux)
+
+2) ls(in git bash)
+        --to list all directories
+
+3) git status 
+        --tells the changes that have been made in a project
+          not in the history of your project
+
+4) git add "file_name" 
+        --to stage the files     
+        --git add . --to add all the files to the staging area
+
+5) To unstage files
+    op1:git restore --staged "filename"
+           --remove a file from staging area,making sure it will not be a part of the next commit.
+
+    op2:git restore "filename" (after unstaging)
+           -- will restore the contents in the file to the contents in the file during its last commit.
+        git restore "filename" (staged)
+           --wkdir files match the staged area file content
+ 
+    op3:git reset
+           --will unstage all the files (the contents of the file will remain untouched.)
+    op4:git restore --source=HEAD --staged --worktree "filename" 
+           --restore both staged and wkdir file to version in the head(file remains staged)
+
+6) git commit -m"commit_message"
+        --To commit the files in the staging area.
+
+7) start "filename" 
+        --to open a file(even for an image file)
+                  (or) 
+   vim "file_name" to open a file in vim
+          esc+:i --insert mode
+          esc+:w --to saved
+          esc+:q -- to exit
+
+8) cat "filename" 
+       --to diaplay all the content in the file 
+   
+9) git rm --cached
+       --remove copy of the file from staging area(if it was ever staged)
+       --this command will remove the file from git repo,not affecting the filesystem.
+   git rm -f 
+       --(if it was ever staged)it will remove the file from repo as well as fs.
+
+10) git log 
+      --to get history of commits
+
+NOTE:you cannot remove one commit from one commit from between because each commit is built on top of one another.
+
+11)git reset "commit id" (copy paste from git log)
+      --will remove all commits done after that particular commit(like rollback)
+        all the commits after that will be deleted
+   git reset --hard "commit_id"
+      --will remove all comits done after that particular commit and rollback the contents of the file too.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+12) git stash  
+      -- after a commit all the changes you have made 
+         lets just say you want to try the program in another way
+         but you dont want to loose the code you have typed ,you can stash the code
+         it will rollback to the previous commit and still save the content till the present 
+         but it will be backshage so it wont be visible
+
+    git stash pop ---to bring all the changes saved in stash 
+    
+    git stash clear --clears the stash content 
+
+       
+
+---------------------------------------------------------------------------------------------------------------------------------
+13)git branch "branchname" 
+      --to create a branch
+
+14)git checkout "branchname"
+      -- to checkout/move to that branch
+
+15)git branch -D "branchname"
+      -- to delete a branch
+
+NOTE :HEAD -->pointer that all the new commit will be made in head.
+   
+16) --each branch acts as a different folder or repo
+    --when you create a new branch all contents of all files will be made as a copy for that branch also 
+    --now,each branch is like a seperate folder when you switch branches,you will see the contents in the fs changing
+    -- if you delete or add a file in the branch  it will not affect the main branch
+    --you have to commit changes when you shift from one branch to another
+    --after branching if any update is made in main branch that will not be reflected in sub-branches(commited ones also)
+
+    git merge "branchname" 
+     --to merger the "branchname" with the branch you are in right now
+17)merge conflict
+      -- A conflict arises when two separate branches have made edits to the same line in a file, 
+         or when a file has been deleted in one branch but edited in the other.
+      -- file has to be opened and the conflict will be indicated with >>>>HEAD and =======
+      -- keep the lines you want and delete the lines you dont want,stage,commit.
+18)git diff
+      --git diff "commit1_id" "commit2_id" 
+           to diffentiate between two commits(difference is highlighted)
+      --git diff
+           if some changes are done after a commit and not staged 
+      --git diff "branch1" "branch 2" 
+           to differntiate between branches
+NOTE :HEAD -->pointer that all the new commit will be made in head.
+   
+19)git rebase -i "commit id"
+      -- to squash multiple commits into a single commit (commit_id -->all commits above that)
+      -- you can either pick or sqash 
+      --you can change that pick to s or squash 
+      -- where ever you have given squash that commit will be squshed eith the commit above that
+               ex p c1
+                  s c2
+                  s c3
+                  p c4
+              op:  c1 ,c4 (c2,c3 into c1)
+------------------------------------------------------------------------------------------------------------------------------------
+20)git remote add origin "url"
+     --connect remote to local   (like import numpy as np,tht url will be saved as origin)
+     --"origin"here origin is just a name ,it can be anything,by default the local
+       repo of your own remote is called origin (like mysim ) in phone
+
+21)git remote -v 
+      --to check which repo it is connected.
+    
+22)git push origin "branchname" 
+      --to push changes to remote repo 
+   git push origin "branchname" --force
+      --git push force command is a git operation responsible for making changes to the remote repository by overwriting an earlier change.
+      --the commit history or the commits you made willl be overwrittern
+      -- use this in case you want to make any changes in a pull request.
+
+23)fork (to cpy a remote rep and make it your repo(a copy)of original)
+     --you can fork the project in the web browser 
+                   (or)
+     --To fork a project projectABC from an account ABC to your account XYZ with the name ProjectXYZ, use the following command
+
+          curl -v --user XYZ:"XYZPASSWORDXYZ" \
+          https://bitbucket.org/api/1.0/repositories/ABC/ProjectABC/fork \
+          --data "name=ProjectXYZ"
+24)git clone "url" 
+      --copy the contents of the remote repository to your local repository
+        so,you can make further changes to the code in your local machine
+25)git pull "url"
+      --The pull command is used to access the changes (commits)from a remote repository to the local repository. 
+      --It updates the local branches with the remote-tracking branches. 
+      --Remote tracking branches are branches that have been set up to push and pull from the remote repository. 
+      --Generally, it is a collection of the fetch and merges command. 
+      --First, it fetches the changes from remote and combined them with the local repository.
+
+
+                                                             difference between git clone and git pull
+
+                              git clone	                                                   |                            git pull
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                     1. Used to set up a local repository.	                           |        1. Used to sync remote and local repositories.
+          2. Make a copy of your remote repository and save it to your local machine.	   |       2. Fetch and merge the latest changes from a remote repository to your local repository.
+                     3. Used once in a project.	                                           |       3. Used several times in a project.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+26)How to contribute to others repository.
+     step1:At the same time a lot of people might work/add features to a particular repo.
+           Every one cant be allowed to make changes in your repository/you cant be allowed to make changes without their permisiion in their repo
+     step2:So,first you have to fork the project
+           now that you have forked that project,it becomes yours
+     step3:git remote add origin "url of the forked copy"
+     step4:git clone "url"(to get the files to work)
+     step5:Create a new branch and start working on the feature 
+           (a new branch every time because one branch can have only one pull request,it will be tougher to review code)
+     step6:git remote add upstream "url of where you forked from"
+     step7:make changes in the branch,stage,commit
+     step8:now if you run git remote -v you should see two repos(4)
+     step9:you can push the changes to remote and create a pull request
+           you can create only one pull request per branch and all the commits you make further will got into the same pullrequest
+     
+lets say you are working on 10 features and making all the commits/changes in the main branch you can raise only one pull request (which will contain all the commits)
+it will be difficult to review the code by the upstream's account holder.
+if you have the 10 features in 10 different branches with a pull request each it becomes easier
+    step10:fetch upstream
+           lets say you have been working on feature for 10 days,meanwhile the upstream could have merged other features 
+           to make sure that tour fork is up-to-date with the upstream you can click the fetch upstream button.
+                                                 (or)
+           git pull upstream main (upstream's main will be pulled)
+    step11:if they accept your code will be merged.
+    step12:you can merge your code to your main branch
+----------------------------------------------------------------------------------------------------------------------------------------------------------
